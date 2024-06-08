@@ -2,9 +2,55 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SatuanController;
+use App\Http\Controllers\Admin\UkmController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Landing\LandingController;
+use App\Http\Middleware\EnsureUserIsAuthenticated;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/category/{id}', [LandingController::class, 'category'])->name('landing.category');
+Route::get('/search', [LandingController::class, 'search'])->name('landing.search');
+Route::get('/detail/{id}', [LandingController::class, 'show'])->name('landing.detail');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');
+
+Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(function () {
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect()->route('login');
+    })->name('logout');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/category', [CategoryController::class, 'index'])->name('category');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/edit/{id}', [categoryController::class, 'edit'])->name('category.edit');
+    Route::post('/category/update', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+
+    Route::get('/satuan', [SatuanController::class, 'index'])->name('satuan');
+    Route::get('/satuan/create', [SatuanController::class, 'create'])->name('satuan.create');
+    Route::post('/satuan/store', [SatuanController::class, 'store'])->name('satuan.store');
+    Route::get('/satuan/edit/{id}', [SatuanController::class, 'edit'])->name('satuan.edit');
+    Route::post('/satuan/update', [SatuanController::class, 'update'])->name('satuan.update');
+    Route::delete('/satuan/delete/{id}', [SatuanController::class, 'delete'])->name('satuan.delete');
+
+    Route::get('/ukm', [UkmController::class, 'index'])->name('ukm');
+    Route::get('/ukm/create', [UkmController::class, 'create'])->name('ukm.create');
+    Route::post('/ukm/store', [UkmController::class, 'store'])->name('ukm.store');
+    Route::get('/ukm/edit/{id}', [UkmController::class, 'edit'])->name('ukm.edit');
+    Route::post('/ukm/update', [UkmController::class, 'update'])->name('ukm.update');
+    Route::delete('/ukm/delete/{id}', [UkmController::class, 'delete'])->name('ukm.delete');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('product');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+});

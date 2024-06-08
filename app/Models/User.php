@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public const ROLE_SUPERADMIN = 'superadmin';
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_UKM = 'ukm';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +24,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'identity_number',
+        'role',
+        'is_superadmin',
+        'temp_password'
     ];
 
     /**
@@ -43,5 +51,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function ukm(): mixed
+    {
+        return $this->hasOne(Ukm::class, 'id_user', 'id');
     }
 }

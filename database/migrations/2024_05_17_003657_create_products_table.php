@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('id_ukm');
             $table->integer('id_category');
+            $table->integer('id_satuan');
             $table->string('product_name', 255);
             $table->text('description');
+            $table->integer('jml_jual_per_satuan');
             $table->double('price');
             $table->tinyInteger('product_status')->default(0);
             $table->timestamps();

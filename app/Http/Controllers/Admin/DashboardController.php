@@ -9,5 +9,6 @@ class DashboardController extends Controller
 {
     function index(): mixed
     {
+        return view('admin.dashboard.index');
     }
 }
