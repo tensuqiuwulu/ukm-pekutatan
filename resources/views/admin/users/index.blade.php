@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="col">
-                    <a href="{{ route('ukm.create') }}">
+                    <a href="{{ route('users.create') }}">
                         <button type="button" class="btn btn-primary mb-3">Tambah Pengguna</button>
                     </a>
                 </div>
@@ -40,7 +40,7 @@
                             @foreach($users as $list)
                             <tr>
                                 <td>
-                                    <a href="{{ route('ukm.edit', [$list->id]) }}">
+                                    <a href="{{ route('users.edit', [$list->id]) }}">
                                         <button type="button" class="btn btn-primary btn-sm">Edit</button>
                                     </a>
                                 </td>
