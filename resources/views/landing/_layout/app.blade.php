@@ -56,7 +56,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{{ route('landing') }}">Home</a></li>
-                            <li><a href="./shop-grid.html">UMKM</a></li>
+                            <li><a href="{{ route('landing.umkm') }}">UMKM</a></li>
                         </ul>
                     </nav>
                 </div>

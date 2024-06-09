@@ -28,11 +28,25 @@ class AuthController extends Controller
                     'isSuperadmin' => $user->is_superadmin
                 ]);
 
-                return response()->json([
-                    'code' => 200,
-                    'status' => 'success',
-                    'url' => 'admin/dashboard'
-                ]);
+                if ($roles[0] == 'admin' || $roles[0] == 'superadmin') {
+                    return response()->json([
+                        'code' => 200,
+                        'status' => 'success',
+                        'url' => 'admin/dashboard'
+                    ]);
+                } else if ($roles[0] == 'ukm') {
+                    return response()->json([
+                        'code' => 200,
+                        'status' => 'success',
+                        'url' => 'admin/product'
+                    ]);
+                } else {
+                    return response()->json([
+                        'code' => 400,
+                        'status' => 'failed',
+                        'message' => 'Role tidak ditemukan'
+                    ]);
+                }
             } else {
                 return response()->json([
                     'code' => 400,

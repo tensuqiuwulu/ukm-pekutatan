@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PDF;
 
 class UkmController extends Controller
 {
@@ -21,6 +22,17 @@ class UkmController extends Controller
     public function create(): mixed
     {
         return view('admin.ukm.create');
+    }
+
+    public function exportPDF($id)
+    {
+        $ukm = Ukm::find($id);
+
+        // Buat PDF dengan menggunakan view
+        $pdf = PDF::loadView('admin.pdf.index', compact('ukm'));
+
+        // Download PDF
+        return $pdf->download('ukm.pdf');
     }
 
     public function store(Request $request): mixed
@@ -54,7 +66,7 @@ class UkmController extends Controller
                 'identity_number' => $request->identity_number,
                 'role' => json_encode(['ukm']),
                 'password' => bcrypt($password), // bcrypt(
-                'temp_password' => $password,
+                'temp_password' => $password
             ]);
 
             Ukm::create([

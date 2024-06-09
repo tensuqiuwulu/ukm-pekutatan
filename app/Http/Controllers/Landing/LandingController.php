@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Ukm;
 
 class LandingController extends Controller
 {
@@ -35,6 +36,22 @@ class LandingController extends Controller
         $products = Product::where('product_name', 'like', '%' . $product . '%')->get();
         $categories = Category::all();
         return view('landing.search', compact('products', 'categories'));
+    }
+
+    function ukm($id = null): mixed
+    {
+
+        if ($id) {
+            $ukm = Ukm::find($id);
+            $products = Product::where('id_ukm', $id)->get();
+            $categories = Category::all();
+            return view('landing.search', compact('ukm', 'categories', 'products'));
+        } else {
+            $categories = Category::all();
+            $products = Product::all();
+            $ukm = Ukm::all();
+            return view('landing.umkm', compact('ukm', 'categories', 'products'));
+        }
     }
 
     function show($id): mixed

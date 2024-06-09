@@ -62,6 +62,7 @@ use App\Models\File;
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
                     <h3>{{ $product->product_name }}</h3>
+                    <h5>{{ $product->ukm->ukm_name }} UMKM</h5>
                     <div class="product__details__price">{{ 'Rp ' . number_format($product->price, 0, ',', '.') }}</div>
                     <p>{{ $product->description }}</p>
                     <a href="{{$whatsappUrl}}" class="primary-btn">Hubungi Penjual</a>
@@ -83,24 +84,21 @@ use App\Models\File;
             </div>
         </div>
         <div class="row">
-            @foreach ($products as $list)
+            <div class="categories__slider owl-carousel">
 
-            @php
-            $file = File::where('model_id', $list->id)->where('model', 'products')->first();
-            @endphp
+                @foreach ($products as $list)
 
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="{{ asset($file->filename) }}">
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="{{ route('landing.detail', ['id' => $list->id]) }}">{{ $list->product_name }}</a></h6>
-                        <h5>{{ 'Rp ' . number_format($list->price, 0, ',', '.') }}</h5>
+                @php
+                $file = File::where('model_id', $list->id)->where('model', 'products')->first();
+                @endphp
+
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" data-setbg="{{ asset($file->filename) }}">
+                        <h5><a href="{{ route('landing.detail', ['id' => $list->id]) }}">{{$list->product_name}}</a></h5>
                     </div>
                 </div>
+                @endforeach
             </div>
-
-            @endforeach
         </div>
     </div>
 </section>

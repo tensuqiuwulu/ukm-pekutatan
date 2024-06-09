@@ -43,10 +43,11 @@ use App\Models\File;
                 </div>
                 <div class="hero__item set-bg" data-setbg="{{ asset('assets/landing/img/hero/banner.jpg') }}">
                     <div class="hero__text">
-                        <span>BUAH SEGAR</span>
-                        <h2>Sayuran <br />100% Organik</h2>
+                        <br>
+                        <br>
+                        <br>
+                        <h2>Produk UMKM <br />100% Asli dan Murah</h2>
                         <p>Pengambilan Gratis dan Pengiriman Tersedia</p>
-                        <a href="#" class="primary-btn">BELI SEKARANG</a>
                     </div>
                 </div>
             </div>

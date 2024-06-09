@@ -11,6 +11,7 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
+        @if (session('userRole') == 'admin' || session('userRole') == 'superadmin')
         <li class="{{ Request::routeIs(['dashboard']) ? 'mm-active' : '' }}">
             <a href="{{ route('dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-home'></i>
@@ -18,7 +19,6 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        @if (session('userRole') == 'admin' || session('userRole') == 'superadmin')
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -55,8 +55,8 @@
         </li>
 
         @if (session('userRole') == 'superadmin')
-        <li class="#">
-            <a href="#">
+        <li class="{{ Request::routeIs(['users']) ? 'mm-active' : '' }}">
+            <a href="{{ route('users') }}">
                 <div class="parent-icon"><i class='bx bx-user'></i>
                 </div>
                 <div class="menu-title">Pengguna</div>

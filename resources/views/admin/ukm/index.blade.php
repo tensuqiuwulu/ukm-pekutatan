@@ -45,6 +45,9 @@
                                         <button type="button" class="btn btn-primary btn-sm">Edit</button>
                                     </a>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{$list->id}}')">Hapus</button>
+                                    <a href="{{ route('export.pdf', [$list->id]) }}">
+                                        <button type="button" class="btn btn-danger btn-sm">PDF</button>
+                                    </a>
                                 </td>
                                 <td>{{ $list->ukm_name }}</td>
                                 <td>{{ $list->user->name }}</td>

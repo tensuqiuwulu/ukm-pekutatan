@@ -7,13 +7,16 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SatuanController;
 use App\Http\Controllers\Admin\UkmController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Landing\LandingController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/category/{id}', [LandingController::class, 'category'])->name('landing.category');
 Route::get('/search', [LandingController::class, 'search'])->name('landing.search');
 Route::get('/detail/{id}', [LandingController::class, 'show'])->name('landing.detail');
+Route::get('/umkm/{id?}', [LandingController::class, 'ukm'])->name('landing.umkm');
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login-proccess', [AuthController::class, 'login'])->name('login-proccess');
@@ -25,6 +28,9 @@ Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(fu
     })->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
@@ -46,6 +52,8 @@ Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(fu
     Route::get('/ukm/edit/{id}', [UkmController::class, 'edit'])->name('ukm.edit');
     Route::post('/ukm/update', [UkmController::class, 'update'])->name('ukm.update');
     Route::delete('/ukm/delete/{id}', [UkmController::class, 'delete'])->name('ukm.delete');
+    Route::get('/export-pdf/{id}', [UkmController::class, 'exportPDF'])->name('export.pdf');
+
 
     Route::get('/product', [ProductController::class, 'index'])->name('product');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
@@ -53,4 +61,6 @@ Route::middleware([EnsureUserIsAuthenticated::class])->prefix('admin')->group(fu
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/product/update', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users');
 });

@@ -42,7 +42,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric',
                 'description' => 'required|string',
                 'jml_jual_per_satuan' => 'required|numeric',
-                'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'file' => 'required|image',
             ], [
                 'product_name.required' => 'Kolom nama produk diperlukan.',
                 'price.required' => 'Kolom harga produk diperlukan.',
@@ -51,9 +51,7 @@ class ProductController extends Controller
                 'jml_jual_per_satuan.numeric' => 'Kolom jumlah jual per satuan harus berupa angka.',
                 'description.required' => 'Kolom deskripsi produk diperlukan.',
                 'file.required' => 'Kolom gambar produk diperlukan.',
-                'file.image' => 'File harus berupa gambar.',
-                'file.mimes' => 'File harus berupa gambar dengan format jpeg, png, jpg, gif, svg.',
-                'file.max' => 'Ukuran file maksimal 2MB.',
+                'file.image' => 'File harus berupa gambar.'
             ]);
 
             if ($validator->fails()) {
@@ -121,12 +119,13 @@ class ProductController extends Controller
     function update(Request $request): mixed
     {
         try {
+
             $validator = Validator::make($request->all(), [
                 'product_name' => 'required|string|max:255',
                 'price' => 'required|numeric',
                 'description' => 'required|string',
                 'jml_jual_per_satuan' => 'required|numeric',
-                'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'file' => 'image',
             ], [
                 'product_name.required' => 'Kolom nama produk diperlukan.',
                 'price.required' => 'Kolom harga produk diperlukan.',
@@ -134,9 +133,7 @@ class ProductController extends Controller
                 'jml_jual_per_satuan.required' => 'Kolom jumlah jual per satuan diperlukan.',
                 'jml_jual_per_satuan.numeric' => 'Kolom jumlah jual per satuan harus berupa angka.',
                 'description.required' => 'Kolom deskripsi produk diperlukan.',
-                'file.image' => 'File harus berupa gambar.',
-                'file.mimes' => 'File harus berupa gambar dengan format jpeg, png, jpg, gif, svg.',
-                'file.max' => 'Ukuran file maksimal 2MB.',
+                'file.image' => 'File harus berupa gambar.'
             ]);
 
             if ($validator->fails()) {
@@ -148,8 +145,8 @@ class ProductController extends Controller
             $product = Product::find($request->id);
 
             $product->update([
-                'id_category' => $request->id_category, // tambahkan field category_id pada table
-                'id_satuan' => $request->id_satuan, // tambahkan field satuan_id pada table
+                'id_category' => $request->id_category,
+                'id_satuan' => $request->id_satuan, 
                 'product_name' => $request->product_name,
                 'jml_jual_per_satuan' => $request->jml_jual_per_satuan,
                 'price' => $request->price,

@@ -22,7 +22,7 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-user fs-5"></i><span>Profile</span></a>
+                    <li><a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}"><i class="bx bx-user fs-5"></i><span>Profile</span></a>
                     </li>
                     <li>
                         <div class="dropdown-divider mb-0"></div>

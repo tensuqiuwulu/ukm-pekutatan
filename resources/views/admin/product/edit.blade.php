@@ -26,12 +26,13 @@ $session = session('userRole');
             <div class="col-xl-8 mx-auto">
                 <div class="card">
                     <div class="card-body p-4">
-                        <h5 class="mb-4">Form Edit Produk UMKM</h5>
+                        <h5 class="mb-4">Form Edit Produk UKM</h5>
                         <form class="needs-validation" id="updateProductForm" enctype="multipart/form-data" novalidate>
                             <div class="row mb-3">
                                 <label for="inputUkmName" class="col-sm-3 col-form-label">Nama Produk</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="inputUkmName" name="product_name" value="{{ $product->product_name }}" placeholder="Masukkan Nama Produk" {{ $session !== 'ukm' ? 'disabled' : '' }} required>
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
                                     <div class="invalid-feedback" id="product_name-error"></div>
                                 </div>
                             </div>

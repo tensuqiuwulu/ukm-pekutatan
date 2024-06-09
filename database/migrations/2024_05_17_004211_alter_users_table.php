@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('identity_number', 16);
             $table->text('role');
             $table->boolean('is_superadmin')->default(false);
+            $table->tinyInteger('status')->default(1);
         });
     }
 
